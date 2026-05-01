@@ -20,6 +20,8 @@ app.use(cors({
     "http://localhost:5173",
     "https://team-task-manager-n8w6.vercel.app"
   ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
 }));
 
