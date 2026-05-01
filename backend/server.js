@@ -15,9 +15,12 @@ const app = express();
 
 // ✅ 1. MIDDLEWARE (FIRST)
 app.use(express.json());
-
 app.use(cors({
-  origin: "*"
+  origin: [
+    "http://localhost:5173",
+    "https://team-task-manager-ten-rho.vercel.app"
+  ],
+  credentials: true
 }));
 
 
