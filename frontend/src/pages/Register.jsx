@@ -1,37 +1,62 @@
-const API = import.meta.env.VITE_API_URL;
+import { useState } from "react";
+import axios from "axios";
 
-const handleRegister = async () => {
-  if (!name || !email || !password) {
-    alert("Please fill all fields");
-    return;
-  }
+function Register() {
+  const API = import.meta.env.VITE_API_URL;
 
-  try {
-    setLoading(true);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-    const res = await axios.post(`${API}/auth/register`, {
-      name,
-      email,
-      password
-    });
+  const handleRegister = async () => {
+    if (!name || !email || !password) {
+      alert("Please fill all fields");
+      return;
+    }
 
-    console.log("Register success:", res.data);
+    try {
+      setLoading(true);
 
-    alert(res.data.message || "Registered successfully");
-    window.location.href = "/";
+      const res = await axios.post(`${API}/auth/register`, {
+        name,
+        email,
+        password
+      });
 
-  } catch (error) {
-    console.log("Register error:", error);
+      console.log("Register success:", res.data);
 
-    const msg =
-      error.response?.data?.message ||   // ✅ proper backend message
-      error.response?.data ||            // fallback
-      error.message ||                   // network error
-      "Register failed";
+      alert(res.data.message || "Registered successfully");
+      window.location.href = "/";
 
-    alert(msg);
-  } finally {
-    setLoading(false);
-  }
-};
+    } catch (error) {
+      console.log("Register error:", error);
+
+      const msg =
+        error.response?.data?.message ||
+        error.response?.data ||
+        error.message ||
+        "Register failed";
+
+      alert(msg);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div>
+      <h2>Register</h2>
+
+      <input placeholder="Name" onChange={(e) => setName(e.target.value)} />
+      <input placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
+      <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+
+      <button onClick={handleRegister}>
+        {loading ? "Registering..." : "Register"}
+      </button>
+    </div>
+  );
+}
+
 export default Register;
