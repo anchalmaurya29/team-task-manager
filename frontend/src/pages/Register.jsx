@@ -34,3 +34,4 @@ const handleRegister = async () => {
     setLoading(false);
   }
 };
+export default Register;
