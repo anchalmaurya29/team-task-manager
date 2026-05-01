@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 
+const API = import.meta.env.VITE_API_URL; // ✅ from .env
+
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,15 +17,12 @@ function Login() {
     try {
       setLoading(true);
 
-      const res = await axios.post(
-        "https://team-task-manager-production-9f0a.up.railway.app/auth/login",
-        {
-          email,
-          password
-        }
-      );
+      const res = await axios.post(`${API}/auth/login`, {
+        email,
+        password
+      });
 
-      console.log("Login response:", res.data); // ✅ debug
+      console.log("Login response:", res.data);
 
       if (res.data.token) {
         localStorage.setItem("token", res.data.token);
@@ -34,7 +33,7 @@ function Login() {
       }
 
     } catch (error) {
-      console.log("Login error:", error.response?.data); // ✅ debug
+      console.log("Login error:", error.response?.data);
       alert(error.response?.data || "Login failed");
     } finally {
       setLoading(false);

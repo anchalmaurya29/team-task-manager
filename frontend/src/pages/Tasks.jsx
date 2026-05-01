@@ -6,7 +6,7 @@ function Tasks() {
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    axios.get("http://localhost:5000/tasks", {
+    axios.get(`${import.meta.env.VITE_API_URL}/tasks`, {
       headers: { Authorization: `Bearer ${token}` }
     })
     .then(res => setTasks(res.data));
