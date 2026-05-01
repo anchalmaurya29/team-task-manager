@@ -36,30 +36,7 @@ function Login() {
       setLoading(false);
     }
   };
-  <h1>TEST</h1>
-  return (
-    <div style={{ padding: "20px", maxWidth: "400px", margin: "auto" }}>
-      <h2>Login</h2>
 
-      <input
-        type="email"
-        placeholder="Email"
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <br /><br />
-
-      <input
-        type="password"
-        placeholder="Password"
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <br /><br />
-
-      <button onClick={handleLogin}>
-        {loading ? "Logging in..." : "Login"}
-      </button>
-    </div>
-  );
   return (
     <div style={{
       padding: "20px",
@@ -68,7 +45,7 @@ function Login() {
       textAlign: "center"
     }}>
       <h2>Login</h2>
-  
+
       <input
         type="email"
         placeholder="Email"
@@ -76,7 +53,7 @@ function Login() {
         onChange={(e) => setEmail(e.target.value)}
       />
       <br /><br />
-  
+
       <input
         type="password"
         placeholder="Password"
@@ -84,15 +61,14 @@ function Login() {
         onChange={(e) => setPassword(e.target.value)}
       />
       <br /><br />
-  
-      {/* 🔐 LOGIN BUTTON */}
+
       <button onClick={handleLogin}>
         {loading ? "Logging in..." : "Login"}
       </button>
-  
-      {/* 👇 YAHAN ADD KARNA HAI */}
+
       <br /><br />
-  
+
+      {/* ✅ REGISTER BUTTON */}
       <button
         onClick={() => window.location.href = "/register"}
         style={{
@@ -106,7 +82,6 @@ function Login() {
       >
         Create Account
       </button>
-  
     </div>
   );
 }
