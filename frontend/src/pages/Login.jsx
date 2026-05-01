@@ -60,6 +60,55 @@ function Login() {
       </button>
     </div>
   );
+  return (
+    <div style={{
+      padding: "20px",
+      maxWidth: "400px",
+      margin: "auto",
+      textAlign: "center"
+    }}>
+      <h2>Login</h2>
+  
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <br /><br />
+  
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <br /><br />
+  
+      {/* 🔐 LOGIN BUTTON */}
+      <button onClick={handleLogin}>
+        {loading ? "Logging in..." : "Login"}
+      </button>
+  
+      {/* 👇 YAHAN ADD KARNA HAI */}
+      <br /><br />
+  
+      <button
+        onClick={() => window.location.href = "/register"}
+        style={{
+          width: "100%",
+          padding: "10px",
+          background: "#2196F3",
+          color: "white",
+          border: "none",
+          cursor: "pointer"
+        }}
+      >
+        Create Account
+      </button>
+  
+    </div>
+  );
 }
 
 export default Login;
