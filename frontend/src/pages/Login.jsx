@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-const API = import.meta.env.VITE_API_URL; // ✅ from .env
+const API = import.meta.env.VITE_API_URL;
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -22,8 +22,6 @@ function Login() {
         password
       });
 
-      console.log("Login response:", res.data);
-
       if (res.data.token) {
         localStorage.setItem("token", res.data.token);
         alert("Login successful");
@@ -33,69 +31,32 @@ function Login() {
       }
 
     } catch (error) {
-      console.log("Login error:", error.response?.data);
-      alert(error.response?.data || "Login failed");
+      alert(error.response?.data?.message || "Login failed");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div style={{
-      padding: "20px",
-      maxWidth: "400px",
-      margin: "auto",
-      textAlign: "center"
-    }}>
+    <div style={{ padding: "20px", maxWidth: "400px", margin: "auto" }}>
       <h2>Login</h2>
 
       <input
         type="email"
         placeholder="Email"
-        value={email}
         onChange={(e) => setEmail(e.target.value)}
-        style={{ width: "100%", padding: "10px" }}
       />
       <br /><br />
 
       <input
         type="password"
         placeholder="Password"
-        value={password}
         onChange={(e) => setPassword(e.target.value)}
-        style={{ width: "100%", padding: "10px" }}
       />
       <br /><br />
 
-      <button
-        onClick={handleLogin}
-        disabled={loading}
-        style={{
-          width: "100%",
-          padding: "10px",
-          background: "#4CAF50",
-          color: "white",
-          border: "none",
-          cursor: "pointer"
-        }}
-      >
+      <button onClick={handleLogin}>
         {loading ? "Logging in..." : "Login"}
-      </button>
-
-      <br /><br />
-
-      <button
-        onClick={() => window.location.href = "/register"}
-        style={{
-          width: "100%",
-          padding: "10px",
-          background: "#2196F3",
-          color: "white",
-          border: "none",
-          cursor: "pointer"
-        }}
-      >
-        Create Account
       </button>
     </div>
   );

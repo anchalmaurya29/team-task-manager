@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+const API = import.meta.env.VITE_API_URL;
+
 function Tasks() {
   const [tasks, setTasks] = useState([]);
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    axios.get(`${import.meta.env.VITE_API_URL}/tasks`, {
+    axios.get(`${API}/tasks`, {
       headers: { Authorization: `Bearer ${token}` }
     })
     .then(res => setTasks(res.data));
   }, []);
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div>
       <h2>All Tasks</h2>
 
       {tasks.map(task => (
