@@ -5,9 +5,9 @@ module.exports = (req, res, next) => {
 
   
   if (!authHeader) {
-    return res.status(401).json("No token");
-  }
-
+    const token = authHeader.startsWith("Bearer ")
+    ? authHeader.split(" ")[1]
+    : authHeader;
   try {
    
     const token = authHeader.split(" ")[1];
@@ -20,4 +20,5 @@ module.exports = (req, res, next) => {
   } catch (err) {
     res.status(401).json("Invalid token");
   }
+}
 };
