@@ -4,7 +4,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
-const auth = require("../middleware/auth"); // ✅ add this
+const auth = require("../middleware/auth");
 
 // =======================
 // REGISTER
@@ -13,32 +13,43 @@ router.post("/register", async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
+    // ✅ Validate input
     if (!name || !email || !password) {
-      return res.status(400).json("All fields are required");
+      return res.status(400).json({ message: "All fields are required" });
     }
 
-    const existingUser = await User.findOne({ email });
+    // ✅ Normalize email
+    const normalizedEmail = email.toLowerCase();
+
+    // ✅ Check existing user
+    const existingUser = await User.findOne({ email: normalizedEmail });
     if (existingUser) {
-      return res.status(400).json("User already exists");
+      return res.status(409).json({ message: "User already exists" });
     }
 
+    // ✅ Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    // ✅ Save user
     const user = new User({
       name,
-      email,
+      email: normalizedEmail,
       password: hashedPassword
     });
 
     await user.save();
 
-    res.json({ message: "User registered successfully" });
+    // ✅ Return success
+    return res.status(201).json({
+      message: "User registered successfully"
+    });
 
   } catch (err) {
-    console.error(err);
-    res.status(500).json("Server error");
+    console.error("REGISTER ERROR:", err);
+    return res.status(500).json({ message: "Server error" });
   }
 });
+
 
 // =======================
 // LOGIN
@@ -48,17 +59,19 @@ router.post("/login", async (req, res) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
-      return res.status(400).json("All fields are required");
+      return res.status(400).json({ message: "All fields are required" });
     }
 
-    const user = await User.findOne({ email });
+    const normalizedEmail = email.toLowerCase();
+
+    const user = await User.findOne({ email: normalizedEmail });
     if (!user) {
-      return res.status(400).json("User not found");
+      return res.status(400).json({ message: "User not found" });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json("Wrong password");
+      return res.status(400).json({ message: "Wrong password" });
     }
 
     const token = jwt.sign(
@@ -67,13 +80,14 @@ router.post("/login", async (req, res) => {
       { expiresIn: "1d" }
     );
 
-    res.json({ token });
+    return res.json({ token });
 
   } catch (err) {
-    console.error(err);
-    res.status(500).json("Server error");
+    console.error("LOGIN ERROR:", err);
+    return res.status(500).json({ message: "Server error" });
   }
 });
+
 
 // =======================
 // GET CURRENT USER
@@ -81,9 +95,10 @@ router.post("/login", async (req, res) => {
 router.get("/me", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-password");
-    res.json(user);
+    return res.json(user);
   } catch (err) {
-    res.status(500).json("Server error");
+    console.error("ME ERROR:", err);
+    return res.status(500).json({ message: "Server error" });
   }
 });
 
