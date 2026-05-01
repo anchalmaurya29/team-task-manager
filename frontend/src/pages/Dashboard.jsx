@@ -20,28 +20,28 @@ function Dashboard() {
 
   // FETCH FUNCTIONS
   const fetchTasks = async () => {
-    const res = await axios.get("http://localhost:5000/tasks", {
+    const res = await axios.get("https://team-task-manager-production-9f0a.up.railway.app/tasks", {
       headers: { Authorization: `Bearer ${token}` }
     });
     setTasks(res.data || []);
   };
 
   const fetchUser = async () => {
-    const res = await axios.get("http://localhost:5000/auth/me", {
+    const res = await axios.get("https://team-task-manager-production-9f0a.up.railway.app/auth/me", {
       headers: { Authorization: `Bearer ${token}` }
     });
     setUser(res.data);
   };
 
   const fetchProjects = async () => {
-    const res = await axios.get("http://localhost:5000/projects", {
+    const res = await axios.get("https://team-task-manager-production-9f0a.up.railway.app/projects", {
       headers: { Authorization: `Bearer ${token}` }
     });
     setProjects(res.data || []);
   };
 
   const fetchUsers = async () => {
-    const res = await axios.get("http://localhost:5000/users", {
+    const res = await axios.get("https://team-task-manager-production-9f0a.up.railway.app/users", {
       headers: { Authorization: `Bearer ${token}` }
     });
     setUsers(res.data || []);
@@ -53,7 +53,7 @@ function Dashboard() {
 
     try {
       await axios.post(
-        "http://localhost:5000/tasks",
+        "https://team-task-manager-production-9f0a.up.railway.app/tasks",
         {
           title,
           dueDate,
@@ -194,7 +194,7 @@ function Dashboard() {
                   value={task.status}
                   onChange={async (e) => {
                     await axios.put(
-                      `http://localhost:5000/tasks/${task._id}`,
+                      `https://team-task-manager-production-9f0a.up.railway.app/tasks/${task._id}`,
                       { status: e.target.value },
                       {
                         headers: { Authorization: `Bearer ${token}` }
