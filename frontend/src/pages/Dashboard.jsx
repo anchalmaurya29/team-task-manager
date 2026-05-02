@@ -7,26 +7,33 @@ function Dashboard() {
   const [tasks, setTasks] = useState([]);
   const token = localStorage.getItem("token");
 
-  const fetchTasks = async () => {
-    const res = await axios.get(`${API}/tasks`, {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-    setTasks(res.data);
-  };
-
   useEffect(() => {
-    fetchTasks();
+    console.log("Dashboard mounted");
+
+    axios.get(`${API}/tasks`, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    .then(res => {
+      console.log(res.data);
+      setTasks(res.data);
+    })
+    .catch(err => {
+      console.log("ERROR:", err);
+    });
+
   }, []);
 
   return (
-    <div>
-      <h2>Dashboard</h2>
+    <div style={{ color: "white" }}>
+      <h1>DASHBOARD LOADED</h1>
 
-      {tasks.map(task => (
-        <div key={task._id}>
-          {task.title} - {task.status}
-        </div>
-      ))}
+      {tasks.length === 0 ? (
+        <p>No tasks found</p>
+      ) : (
+        tasks.map(task => (
+          <div key={task._id}>{task.title}</div>
+        ))
+      )}
     </div>
   );
 }
