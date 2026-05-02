@@ -8,13 +8,14 @@
 /* Sidebar */
 .sidebar {
   width: 250px;
-  background: #1e293b;
+  background: linear-gradient(180deg, #0f172a, #1e293b);
   color: white;
   padding: 20px;
 }
 
 .profile {
   text-align: center;
+  margin-bottom: 20px;
 }
 
 .avatar {
@@ -25,31 +26,48 @@
   margin-top: 30px;
 }
 
-.menu p {
+/* 🔥 FIXED SIDEBAR LINKS */
+.menu-link {
+  display: block;
   padding: 10px;
-  cursor: pointer;
+  margin: 8px 0;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: 0.2s;
 }
 
-.menu .active {
+.menu-link:hover {
   background: #334155;
-  border-radius: 5px;
+}
+
+.menu-link.active {
+  background: #475569;
+}
+
+/* Logout */
+.logout {
+  color: #ef4444;
+  margin-top: 20px;
+  cursor: pointer;
 }
 
 /* Main */
 .main {
   flex: 1;
-  background: #f1f5f9;
-  padding: 20px;
+  background: #f8fafc;
+  padding: 25px;
 }
 
 /* Header */
 .header {
   display: flex;
   justify-content: space-between;
-  background: #0f172a;
+  background: #1e293b;
   color: white;
   padding: 15px;
   border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
 /* Cards */
@@ -63,9 +81,16 @@
 .card {
   padding: 30px;
   color: white;
-  border-radius: 10px;
+  border-radius: 15px;
   text-align: center;
   font-size: 20px;
+  font-weight: bold;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
 }
 
 /* Colors */
@@ -84,80 +109,55 @@
 .blue {
   background: #3b82f6;
 }
+
+/* Add task section */
 .add-task-section {
-    margin: 20px 0;
-  }
-  
-  .add-task-section input {
-    padding: 10px;
-    width: 250px;
-  }
-  
-  .add-task-section button {
-    padding: 10px;
-    margin-left: 10px;
-  }
-  
-  .no-task {
-    text-align: center;
-    color: gray;
-  }
-  .overdue-section {
-    margin-top: 20px;
-    background: #ffe5e5;
-    padding: 15px;
-    border-radius: 8px;
-  }
-  
-  .overdue-item {
-    color: red;
-    margin-top: 5px;
-  }
-  .add-task-section {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-  }
-  
-  .right-controls {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-  }
-  /* Smooth font + background */
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.add-task-section input {
+  padding: 10px;
+  width: 250px;
+}
+
+.add-task-section button {
+  padding: 10px;
+}
+
+/* No task text */
+.no-task {
+  text-align: center;
+  color: gray;
+}
+
+/* Overdue section */
+.overdue-section {
+  margin-top: 20px;
+  background: #ffe5e5;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.overdue-item {
+  color: red;
+  margin-top: 5px;
+}
+
+/* Right controls */
+.right-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Body */
 body {
   margin: 0;
   background: #0f172a;
   font-family: 'Segoe UI', sans-serif;
-}
-
-/* Improve main area */
-.main {
-  background: #f8fafc;
-  padding: 25px;
-}
-
-/* Header modern look */
-.header {
-  background: #1e293b;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
-
-/* Cards modern UI */
-.card {
-  border-radius: 15px;
-  font-weight: bold;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  transition: transform 0.2s ease;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-}
-
-/* Sidebar improvement */
-.sidebar {
-  background: linear-gradient(180deg, #0f172a, #1e293b);
 }
 
 /* Task list styling */
