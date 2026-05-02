@@ -124,3 +124,67 @@
     gap: 10px;
     align-items: center;
   }
+  /* Smooth font + background */
+body {
+  margin: 0;
+  background: #0f172a;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Improve main area */
+.main {
+  background: #f8fafc;
+  padding: 25px;
+}
+
+/* Header modern look */
+.header {
+  background: #1e293b;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* Cards modern UI */
+.card {
+  border-radius: 15px;
+  font-weight: bold;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* Sidebar improvement */
+.sidebar {
+  background: linear-gradient(180deg, #0f172a, #1e293b);
+}
+
+/* Task list styling */
+.task-item {
+  background: white;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 8px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+/* Input styling */
+input, select {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* Button styling */
+button {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #2563eb;
+}
